@@ -1,0 +1,120 @@
+I"�<h1 id="用jekylltypora和github-page搭建个人博客">用Jekyll,Typora和Github Page搭建个人博客</h1>
+
+<h2 id="使用ssh连接到github">使用SSH连接到GitHub</h2>
+
+<ol>
+  <li>生成SSH密钥</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen -t ed25519 -C "m15737740589@163.com"
+</code></pre></div></div>
+
+<ol>
+  <li>在后台启动 ssh 代理</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eval "$(ssh-agent -s)"
+</code></pre></div></div>
+
+<ol>
+  <li>将 SSH 私钥添加到 ssh-agent</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-add ~/.ssh/id_ed25519
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>将 SSH 密钥复制到剪贴板</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install xclip
+xclip -selection clipboard &lt; ~/.ssh/id_ed25519.pub
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>在任何页面的右上角，单击您的个人资料照片，然后单击 Settings（设置），在用户设置侧边栏中，单击 SSH and GPG keys（SSH 和 GPG 密钥），单击 New SSH key（新 SSH 密钥）或 Add SSH key（添加 SSH 密钥），在 “Title”（标题）字段中，为新密钥添加描述性标签，将密钥粘贴到 “Key”（密钥）字段，单击 Add SSH key（添加 SSH 密钥）。</p>
+  </li>
+  <li>
+    <p>使用以下命令来测试是否成功</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh -T git@github.com
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="安装git">安装Git</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install git
+git config --global user.name "Xingshihao"
+git config --global user.email m15737740589@163.com
+git init
+#已初始化空的 Git 仓库于 /home/xsh/.git/
+</code></pre></div></div>
+
+<h2 id="安装jekyll">安装Jekyll</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install ruby-full build-essential zlib1g-dev
+echo '# Install Ruby Gems to ~/gems' &gt;&gt; ~/.bashrc
+echo 'export GEM_HOME="$HOME/gems"' &gt;&gt; ~/.bashrc
+echo 'export PATH="$HOME/gems/bin:$PATH"' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+gem install jekyll bundler
+gem install jekyll bundler
+jekyll new myblog
+cd myblog
+bundle exec jekyll serve
+</code></pre></div></div>
+
+<h2 id="申请github-page">申请Github page</h2>
+
+<ol>
+  <li>
+    <p>新建一个rop，仓库名称有固定的格式： username.github.io，其中username必须是Github账户的用户名（我的是FollowHeart007），http://github.io是固定的，这个地址将会成为个人站点的网站地址。另外，我们可以勾选Initialize this repository with a README，让仓库自动创建一个README.md文件，我们用它来做站点的首页（当然也可以不创建，后面自行创建，或是建立index.html也行）。</p>
+
+    <p>注意： username如果不是Github账户名，这个仓库就会成为username.github.io的子站点，比如访问地址会是：username.github.io/aaa.github.io。可见，username.github.io是Github默认分配给你的域名，同名仓库即代表着默认网站内容。而username.github.io/仓库名称，是用来访问你的其它仓库的地址。</p>
+  </li>
+  <li>
+    <p>后续过程可以参考知乎的这篇文章</p>
+
+  </li>
+  <li>
+    <p>使用命令将自己和别人的博客主题克隆到本地</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:leopardpan/leopardpan.github.io.git
+git clone git@github.com:FollowHeart007/FollowHeart007.github.io.git
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>将FollowHeart007.github.io文件夹里面的内容全部替换成leopardpan.github.io里面的内容。</p>
+  </li>
+  <li>
+    <p>对FollowHeart007.github.io里面的内容进行修改，详细可以参考Bilibili这两个视频</p>
+
+  </li>
+</ol>
+
+<h2 id="安装typora">安装Typora</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install typora
+</code></pre></div></div>
+
+<h2 id="使用git将本地仓库上传">使用Git将本地仓库上传</h2>
+
+<ol>
+  <li>
+    <p>使用命令在本地预览仓库</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll server
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>使用Git将本地仓库上传到网上</p>
+  </li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add .
+git commit -m "init"
+git push origin
+</code></pre></div></div>
+
+:ET
