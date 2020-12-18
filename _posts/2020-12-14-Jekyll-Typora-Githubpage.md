@@ -5,8 +5,6 @@ date:   2020-12-14 23:41:00 +0800
 categories: jekyll update
 ---
 
-# 用Jekyll,Typora和Github Page搭建个人博客
-
 ## 使用SSH连接到GitHub
 
 1. 生成SSH密钥
